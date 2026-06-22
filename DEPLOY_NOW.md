@@ -85,7 +85,7 @@ npm run build && firebase deploy --only hosting
 
 ### Browser में खोलो:
 ```
-https://saint-xavier-convent-school.web.app/social-dashboard
+https://saint-xavier-convent-school.web.app
 ```
 
 ### Check करो:
@@ -102,7 +102,7 @@ https://saint-xavier-convent-school.web.app/social-dashboard
 |------|-------|
 | **Project ID** | saint-xavier-convent-school |
 | **Firebase URL** | https://saint-xavier-convent-school.web.app |
-| **Dashboard URL** | https://saint-xavier-convent-school.web.app/social-dashboard |
+| **Dashboard URL** | https://saint-xavier-convent-school.com.app/social-dashboard |
 | **API Key** | AIzaSyBmk4QWyCdIxnXuvBmrkbcPZAbwqPZ4wuM |
 | **Storage Bucket** | saint-xavier-convent-school.firebasestorage.app |
 
