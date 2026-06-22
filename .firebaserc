@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "saint-xavier-convent-school"
+  },
+  "targets": {
+    "saint-xavier-convent-school": {
+      "hosting": {
+        "portal": [
+          "saint-xavier-convent-school"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
