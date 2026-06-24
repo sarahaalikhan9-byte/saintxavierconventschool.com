@@ -1,8 +1,0 @@
-{
-  "name": "Remix: Saint Xavier Convent School Portal",
-  "description": "An interactive administration and student portal for Saint Xavier Convent School, Indore, featuring marksheet builders, TC transfer certificate engines, AI student attendance displays, live virtual classroom modules, homework checkers, and school home directories.",
-  "requestFramePermissions": [],
-  "majorCapabilities": [
-    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
-  ]
-}

@@ -88,17 +88,13 @@ Routes में add करो:
 
 **Content (copy-paste करो):**
 ```env
-# ---- GEMINI AI ----
-GEMINI_API_KEY=replace_with_gemini_api_key
-VITE_GEMINI_API_KEY=replace_with_vite_gemini_api_key
-
 # ---- SERVER ----
 PORT=5000
 NODE_ENV=development
 
 # ---- JWT SECRETS ----
-JWT_SECRET=sxc_school_indore_jwt_secret_key_2024_demo
-JWT_REFRESH_SECRET=sxc_school_indore_refresh_secret_2024_demo
+JWT_SECRET=replace_with_strong_secret
+JWT_REFRESH_SECRET=replace_with_strong_refresh_secret
 JWT_EXPIRE=24h
 JWT_REFRESH_EXPIRE=7d
 BCRYPT_ROUNDS=10
@@ -107,7 +103,7 @@ BCRYPT_ROUNDS=10
 CORS_ORIGIN=http://localhost:3000
 
 # ---- FIREBASE ----
-VITE_FIREBASE_API_KEY=AIzaSyBmk4QWyCdIxnXuvBmrkbcPZAbwqPZ4wuM
+VITE_FIREBASE_API_KEY=replace_with_firebase_api_key
 VITE_FIREBASE_AUTH_DOMAIN=saint-xavier-convent-school.firebaseapp.com
 VITE_FIREBASE_PROJECT_ID=saint-xavier-convent-school
 VITE_FIREBASE_STORAGE_BUCKET=saint-xavier-convent-school.firebasestorage.app

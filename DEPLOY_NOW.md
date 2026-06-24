@@ -103,7 +103,7 @@ https://saint-xavier-convent-school.web.app
 | **Project ID** | saint-xavier-convent-school |
 | **Firebase URL** | https://saint-xavier-convent-school.web.app |
 | **Dashboard URL** | https://saint-xavier-convent-school.com.app/social-dashboard |
-| **API Key** | AIzaSyBmk4QWyCdIxnXuvBmrkbcPZAbwqPZ4wuM |
+| **API Key** | replace_with_firebase_api_key |
 | **Storage Bucket** | saint-xavier-convent-school.firebasestorage.app |
 
 ---
