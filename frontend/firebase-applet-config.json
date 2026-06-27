@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "saint-xavier-convent-sch-7ba49-9868e",
     "public": "dist",
     "ignore": [
       "firebase.json",
