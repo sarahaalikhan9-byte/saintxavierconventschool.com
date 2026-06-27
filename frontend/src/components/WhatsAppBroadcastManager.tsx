@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MessageCircle, X, Users, Copy, Plus, Trash2, CheckCircle2, Phone } from 'lucide-react';
+import { MessageCircle, X, Users, Copy, Plus, Trash2, CheckCircle2, Lock, LogOut } from 'lucide-react';
 
 interface WhatsAppBroadcastManagerProps {
   isOpen: boolean;
@@ -15,8 +15,18 @@ interface BroadcastList {
   status?: 'pending' | 'sending' | 'completed';
 }
 
+const WHATSAPP_ADMIN_ID = 'WhatsApp@saintxavierconventschool.com';
+const WHATSAPP_ADMIN_PASSWORD = 'Saint@1990';
+const WHATSAPP_SESSION_KEY = 'sxc_whatsapp_manager_session';
+
 export default function WhatsAppBroadcastManager({ isOpen, onClose, theme }: WhatsAppBroadcastManagerProps) {
   const isGlass = theme === 'glassNavy';
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return localStorage.getItem(WHATSAPP_SESSION_KEY) === 'active';
+  });
+  const [loginId, setLoginId] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
 
   // Backend Integration State
   const [isBackendConnected, setIsBackendConnected] = useState(false);
@@ -64,6 +74,26 @@ export default function WhatsAppBroadcastManager({ isOpen, onClose, theme }: Wha
   }, [broadcastLists]);
 
   if (!isOpen) return null;
+
+  const handleLogin = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (loginId.trim().toLowerCase() === WHATSAPP_ADMIN_ID.toLowerCase() && loginPassword === WHATSAPP_ADMIN_PASSWORD) {
+      setIsAuthenticated(true);
+      localStorage.setItem(WHATSAPP_SESSION_KEY, 'active');
+      setLoginId('');
+      setLoginPassword('');
+      setLoginError('');
+      return;
+    }
+    setLoginError('Invalid WhatsApp manager ID or password.');
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    localStorage.removeItem(WHATSAPP_SESSION_KEY);
+    setLoginPassword('');
+    setPairingCode(null);
+  };
 
   const handleAddNumbers = () => {
     if (!inputText.trim()) return;
@@ -170,12 +200,68 @@ export default function WhatsAppBroadcastManager({ isOpen, onClose, theme }: Wha
             </p>
           </div>
         </div>
-        <button onClick={onClose} className={`p-1 rounded-md transition ${isGlass ? 'hover:bg-slate-100 text-slate-500' : 'hover:bg-[#2C2C2E] text-slate-400'}`}>
-          <X className="w-5 h-5" />
-        </button>
+        <div className="flex items-center gap-1">
+          {isAuthenticated && (
+            <button onClick={handleLogout} className={`p-1 rounded-md transition ${isGlass ? 'hover:bg-slate-100 text-slate-500' : 'hover:bg-[#2C2C2E] text-slate-400'}`} title="Logout WhatsApp Manager">
+              <LogOut className="w-4 h-4" />
+            </button>
+          )}
+          <button onClick={onClose} className={`p-1 rounded-md transition ${isGlass ? 'hover:bg-slate-100 text-slate-500' : 'hover:bg-[#2C2C2E] text-slate-400'}`}>
+            <X className="w-5 h-5" />
+          </button>
+        </div>
       </div>
 
       <div className="p-4 flex flex-col max-h-[70vh]">
+        {!isAuthenticated ? (
+          <form onSubmit={handleLogin} className="space-y-3">
+            <div className={`p-3 rounded-xl border flex items-start gap-3 ${isGlass ? 'bg-green-50 border-green-200' : 'bg-green-500/10 border-green-500/30'}`}>
+              <Lock className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
+              <div>
+                <p className="text-sm font-black">Protected WhatsApp Manager</p>
+                <p className={`text-[11px] mt-1 ${isGlass ? 'text-[#431407]/65' : 'text-slate-400'}`}>
+                  Login required before managing broadcast lists or sending messages.
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <label className={`block text-xs font-bold mb-1.5 uppercase tracking-wider ${isGlass ? 'text-[#431407]/70' : 'text-slate-400'}`}>
+                WhatsApp Manager ID
+              </label>
+              <input
+                value={loginId}
+                onChange={(event) => setLoginId(event.target.value)}
+                className={`w-full p-2.5 rounded-xl border text-xs outline-none transition ${isGlass ? 'bg-white border-[#431407]/20 focus:border-green-500 text-[#431407]' : 'bg-[#0F0F12] border-[#2C2C2E] focus:border-green-500 text-white'}`}
+                placeholder="Enter manager ID"
+                autoComplete="username"
+              />
+            </div>
+
+            <div>
+              <label className={`block text-xs font-bold mb-1.5 uppercase tracking-wider ${isGlass ? 'text-[#431407]/70' : 'text-slate-400'}`}>
+                Password
+              </label>
+              <input
+                value={loginPassword}
+                onChange={(event) => setLoginPassword(event.target.value)}
+                type="password"
+                className={`w-full p-2.5 rounded-xl border text-xs outline-none transition ${isGlass ? 'bg-white border-[#431407]/20 focus:border-green-500 text-[#431407]' : 'bg-[#0F0F12] border-[#2C2C2E] focus:border-green-500 text-white'}`}
+                placeholder="Enter password"
+                autoComplete="current-password"
+              />
+            </div>
+
+            {loginError && (
+              <p className="text-xs font-bold text-red-500">{loginError}</p>
+            )}
+
+            <button className="w-full bg-green-500 hover:bg-green-600 text-white text-xs font-bold py-2.5 rounded-xl transition flex items-center justify-center gap-2">
+              <Lock className="w-4 h-4" /> Unlock WhatsApp Broadcasts
+            </button>
+          </form>
+        ) : (
+          <>
         
         {/* Input Section */}
         <div className="mb-4">
@@ -288,6 +374,8 @@ export default function WhatsAppBroadcastManager({ isOpen, onClose, theme }: Wha
           )}
         </div>
 
+          </>
+        )}
       </div>
     </div>
   );
