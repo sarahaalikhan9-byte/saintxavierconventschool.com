@@ -1,12 +1,12 @@
 {
   "projects": {
-    "default": "saint-xavier-convent-school"
+    "default": "saint-xavier-convent-sch-7ba49"
   },
   "targets": {
-    "saint-xavier-convent-school": {
+    "saint-xavier-convent-sch-7ba49": {
       "hosting": {
         "portal": [
-          "saint-xavier-convent-school"
+          "saint-xavier-convent-sch-7ba49"
         ]
       }
     }
